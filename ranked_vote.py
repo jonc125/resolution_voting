@@ -35,6 +35,8 @@ valid_tokens = parse_tokens(args.tokens)
 valid_votes, invalid_votes = filter_valid(votes, valid_tokens)
 
 print(f"Running election for {args.seats} seats with {len(valid_votes)} valid votes ({len(invalid_votes)} invalid)")
+if len(invalid_votes) > 0:
+  print("Invalid tokens:", invalid_votes)
 
 result = run_stv(valid_votes, args.question, args.seats)
 print(result)
