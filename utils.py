@@ -25,6 +25,7 @@ def parse_tokens(token_file: Path) -> set[str]:
 
 def parse_google_form(csv_file: Path, token_col: str, token_map: Optional[Path]=None) -> pd.DataFrame:
     votes = pd.read_csv(csv_file, dtype=str, keep_default_na=False)
+    votes[token_col] = votes[token_col].str.strip()
     if token_map:
         token_mapping = pd.read_csv(token_map, dtype=str)
         assert (token_mapping.columns == ["old", "new"]).all()
